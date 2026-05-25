@@ -1,17 +1,28 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
-import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
+import SignUp from "./pages/SignUp";
 
 const App = () => {
+  let authUser = null;
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/log-in" element={<LogIn />} />
-        <Route path="*" element={<NotFound/>} />
+        <Route
+          path="/"
+          element={authUser ? <HomePage /> : <Navigate to={"/log-in"} />}
+        />
+        <Route
+          path="/sign-up"
+          element={!authUser ? <SignUp /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/log-in"
+          element={!authUser ? <LogIn /> : <Navigate to={"/"} />}
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

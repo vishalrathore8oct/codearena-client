@@ -12,14 +12,14 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={authUser ? <HomePage /> : <Navigate to={"/log-in"} />}
+          element={authUser ? <HomePage /> : <Navigate to={"/login"} />}
         />
         <Route
-          path="/sign-up"
+          path="/signup"
           element={!authUser ? <SignUp /> : <Navigate to={"/"} />}
         />
         <Route
-          path="/log-in"
+          path="/login"
           element={!authUser ? <LogIn /> : <Navigate to={"/"} />}
         />
         <Route path="*" element={<NotFound />} />

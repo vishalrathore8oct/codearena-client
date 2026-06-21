@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
 import type { SignUpForm } from "../types/signUpForm";
 import { SignUpSchema } from "../validations/signUpSchema";
+import useAuthStore from "../store/authStore.";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { signup } = useAuthStore();
   const {
     register,
     handleSubmit,
@@ -18,7 +20,11 @@ const SignUp = () => {
   });
 
   const onSubmit = async (data: SignUpForm) => {
-    console.log("signup data", data);
+    try {
+      await signup(data);
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
   };
 
   return (

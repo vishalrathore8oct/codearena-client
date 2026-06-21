@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
 import type { LogInForm } from "../types/LogInForm";
 import { LogInSchema } from "../validations/LogInSchema";
+import useAuthStore from "../store/authStore.";
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuthStore();
   const {
     register,
     handleSubmit,
@@ -18,7 +20,11 @@ const LogIn = () => {
   });
 
   const onSubmit = async (data: LogInForm) => {
-    console.log("LogIn data", data);
+    try {
+      await login(data);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
   return (
@@ -118,7 +124,7 @@ const LogIn = () => {
       </div>
 
       <AuthImagePattern
-        title="Welcome to our platform!"
+        title="Welcome back to our platform!"
         subtitle="Log In to access our platform and start using our services."
       />
     </div>

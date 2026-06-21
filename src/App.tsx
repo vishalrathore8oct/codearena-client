@@ -1,14 +1,23 @@
+import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
+import useAuthStore from "./store/authStore.";
+import { useEffect } from "react";
 
 const App = () => {
-  let authUser = null;
+
+  const { authUser, checkAuth } = useAuthStore();
+
+  useEffect (() => {
+    checkAuth();
+  }, [checkAuth]);
 
   return (
     <>
+      <Toaster position="top-right" />
       <Routes>
         <Route
           path="/"

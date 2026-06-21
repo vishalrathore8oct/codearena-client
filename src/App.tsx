@@ -1,17 +1,17 @@
+import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
+import HomeLayout from "./Layouts/HomeLayout";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
 import useAuthStore from "./store/authStore.";
-import { useEffect } from "react";
 
 const App = () => {
-
   const { authUser, checkAuth } = useAuthStore();
 
-  useEffect (() => {
+  useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
@@ -21,8 +21,11 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={authUser ? <HomePage /> : <Navigate to={"/login"} />}
-        />
+          element={authUser ? <HomeLayout /> : <Navigate to={"/login"} />}
+        >
+          <Route index element={<HomePage />} />
+        </Route>
+
         <Route
           path="/signup"
           element={!authUser ? <SignUp /> : <Navigate to={"/"} />}

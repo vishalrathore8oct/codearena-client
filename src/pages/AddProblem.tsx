@@ -1,5 +1,11 @@
+import CreateProblem from "../components/CreateProblem";
+
 const AddProblem = () => {
-  return <div>AddProblem</div>;
+  return (
+    <>
+      <CreateProblem />
+    </>
+  );
 };
 
 export default AddProblem;

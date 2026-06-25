@@ -1,7 +1,7 @@
+import { Code, LogOut, User } from "lucide-react";
 import React from "react";
-import { User, Code, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
-import useAuthStore from "../store/authStore.";
+import useAuthStore from "../store/useAuthStore";
 import LogoutButton from "./LogoutButton";
 
 interface AuthUser {

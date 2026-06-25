@@ -9,7 +9,7 @@ import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
-import useAuthStore from "./store/authStore.";
+import useAuthStore from "./store/useAuthStore";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();

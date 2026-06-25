@@ -104,11 +104,10 @@ const CreateProblemForm = () => {
   const onSubmit = async (data: CreateProblemFormValues) => {
     try {
       const res = await axiosInstance.post("/problems/create-problem", data);
-      console.log("response data", res.data);
       toast.success(res.data.message || "Problem Created successfully⚡");
       navigation("/");
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
       toast.error(
         error?.response?.data?.message || "Error while creating problem",
       );

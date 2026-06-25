@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
+import useAuthStore from "../store/useAuthStore";
 import type { SignUpForm } from "../types/signUpForm";
 import { SignUpSchema } from "../validations/signUpSchema";
-import useAuthStore from "../store/authStore.";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -126,8 +126,8 @@ const SignUp = () => {
             >
               {isSubmitting ? (
                 <>
-                  <LoaderPinwheel className="h-5 w-5 animate-spin mr-2" /> Signing
-                  up...
+                  <LoaderPinwheel className="h-5 w-5 animate-spin mr-2" />{" "}
+                  Signing up...
                 </>
               ) : (
                 "Sign Up"

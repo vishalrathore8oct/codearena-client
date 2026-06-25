@@ -1,7 +1,7 @@
 import { ArrowLeft, Code, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
-import useAuthStore from "../store/authStore.";
+import useAuthStore from "../store/useAuthStore";
 
 const NotFound = () => {
   const { authUser } = useAuthStore();

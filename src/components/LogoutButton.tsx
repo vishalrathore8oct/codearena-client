@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import React from "react";
-import useAuthStore from "../store/authStore.";
+import useAuthStore from "../store/useAuthStore";
 
 interface LogoutButtonProps {
   children: ReactNode;

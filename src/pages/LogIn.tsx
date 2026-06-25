@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
-import useAuthStore from "../store/authStore.";
+import useAuthStore from "../store/useAuthStore";
 import type { LogInForm } from "../types/LogInForm";
 import { LogInSchema } from "../validations/logInSchema";
 
@@ -104,7 +104,8 @@ const LogIn = () => {
             >
               {isSubmitting ? (
                 <>
-                  <LoaderPinwheel className="h-5 w-5 animate-spin mr-2" /> Loging...
+                  <LoaderPinwheel className="h-5 w-5 animate-spin mr-2" />{" "}
+                  Loging...
                 </>
               ) : (
                 "Log In"

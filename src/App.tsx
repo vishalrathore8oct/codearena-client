@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
+import AddProblem from "./pages/AddProblem";
+import AdminRoutes from "./components/AdminRoutes";
 import HomeLayout from "./Layouts/HomeLayout";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
@@ -34,6 +36,12 @@ const App = () => {
           path="/login"
           element={!authUser ? <LogIn /> : <Navigate to={"/"} />}
         />
+        <Route element={<AdminRoutes />}>
+          <Route
+            path="/add-problem"
+            element={authUser ? <AddProblem /> : <Navigate to={"/"} />}
+          />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

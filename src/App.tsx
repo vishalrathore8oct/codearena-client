@@ -1,8 +1,8 @@
 import { LoaderPinwheel } from "lucide-react";
 import { useEffect } from "react";
-import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AdminRoutes from "./components/AdminRoutes";
+import GlobalToaster from "./components/GlobalToaster";
 import HomeLayout from "./layouts/HomeLayout";
 import AddProblem from "./pages/AddProblem";
 import HomePage from "./pages/HomePage";
@@ -20,7 +20,7 @@ const App = () => {
 
   if (isCheckingAuth && !authUser) {
     return (
-     <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen">
         <LoaderPinwheel className="size-10 animate-spin" />
       </div>
     );
@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <>
-      <Toaster position="top-right" />
+      <GlobalToaster />
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route

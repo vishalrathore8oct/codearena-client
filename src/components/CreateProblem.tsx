@@ -8,7 +8,9 @@ import {
   Download,
   FileText,
   Lightbulb,
+  LoaderPinwheel,
   Plus,
+  RotateCcw,
   Trash2,
 } from "lucide-react";
 import { useState } from "react";
@@ -19,6 +21,28 @@ import sampleData from "../json/sample.json";
 import axiosInstance from "../lib/axios";
 import type { CreateProblemFormValues } from "../types/CreateProblemForm";
 import { createProblemSchema } from "../validations/createProblemSchema";
+
+const defaultFormValues: CreateProblemFormValues = {
+  title: "",
+  description: "",
+  difficulty: "EASY",
+  tags: [""],
+  hints: [""],
+  constraints: [""],
+  editorial: "",
+  examples: [{ input: "", output: "", explanation: "" }],
+  testcases: [{ input: "", output: "" }],
+  codeSnippets: {
+    JAVASCRIPT: "function solution() {\n  // Write your code here\n}",
+    PYTHON: "def solution():\n    # Write your code here\n    pass",
+    JAVA: "public class Solution {\n    public static void main(String[] args) {\n        // Write your code here\n    }\n}",
+  },
+  referenceSolutions: {
+    JAVASCRIPT: "// Add your reference solution here",
+    PYTHON: "# Add your reference solution here",
+    JAVA: "// Add your reference solution here",
+  },
+};
 
 const CreateProblemForm = () => {
   const [selectedSampleIndex, setSelectedSampleIndex] = useState(0);
@@ -32,27 +56,7 @@ const CreateProblemForm = () => {
     formState: { errors },
   } = useForm<CreateProblemFormValues>({
     resolver: zodResolver(createProblemSchema.shape.body),
-    defaultValues: {
-      title: "",
-      description: "",
-      difficulty: "EASY",
-      tags: [""],
-      hints: [""],
-      constraints: [""],
-      editorial: "",
-      examples: [{ input: "", output: "", explanation: "" }],
-      testcases: [{ input: "", output: "" }],
-      codeSnippets: {
-        JAVASCRIPT: "function solution() {\n  // Write your code here\n}",
-        PYTHON: "def solution():\n    # Write your code here\n    pass",
-        JAVA: "public class Solution {\n    public static void main(String[] args) {\n        // Write your code here\n    }\n}",
-      },
-      referenceSolutions: {
-        JAVASCRIPT: "// Add your reference solution here",
-        PYTHON: "# Add your reference solution here",
-        JAVA: "// Add your reference solution here",
-      },
-    },
+    defaultValues: defaultFormValues,
   });
 
   const {
@@ -697,13 +701,26 @@ const CreateProblemForm = () => {
               </div>
             </div>
 
-            <div className="card-actions justify-end pt-4 border-t mt-8">
+            <div className="card-actions flex flex-col sm:flex-row justify-end pt-4 border-t mt-8 gap-3">
+              <button
+                type="button"
+                className="btn btn-outline btn-error w-full sm:w-auto btn-lg gap-2"
+                onClick={() => reset(defaultFormValues)}
+                disabled={isLoading}
+              >
+                <RotateCcw className="w-5 h-5" />
+                Reset Form
+              </button>
               <button
                 type="submit"
                 className="btn btn-primary w-full sm:w-auto btn-lg gap-2"
+                disabled={isLoading}
               >
                 {isLoading ? (
-                  <span className="loading loading-spinner text-white"></span>
+                  <>
+                    <LoaderPinwheel className="h-5 w-5 animate-spin mr-2" />{" "}
+                    Creating...
+                  </>
                 ) : (
                   <>
                     <CheckCircle2 className="w-5 h-5" />

@@ -19,11 +19,11 @@ const App = () => {
     <>
       <Toaster position="top-right" />
       <Routes>
-        <Route
-          path="/"
-          element={authUser ? <HomeLayout /> : <Navigate to={"/login"} />}
-        >
-          <Route index element={<HomePage />} />
+        <Route path="/" element={<HomeLayout />}>
+          <Route
+            index
+            element={authUser ? <HomePage /> : <Navigate to={"/login"} />}
+          />
         </Route>
 
         <Route

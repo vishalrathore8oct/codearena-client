@@ -157,18 +157,18 @@ const CreateProblemForm = () => {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-7xl">
+    <div className="container mx-auto py-4 md:py-8 px-2 sm:px-4 max-w-7xl">
       <div className="card bg-base-100 shadow-xl">
-        <div className="card-body p-6 md:p-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 pb-4 border-b">
-            <h2 className="card-title text-2xl md:text-3xl flex items-center gap-3">
-              <FileText className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+        <div className="card-body p-4 sm:p-6 md:p-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 pb-4 border-b gap-4">
+            <h2 className="card-title text-xl sm:text-2xl md:text-3xl flex items-center gap-2 sm:gap-3">
+              <FileText className="w-6 h-6 md:w-8 md:h-8 text-primary shrink-0" />
               Create Problem
             </h2>
 
-            <div className="flex flex-col md:flex-row items-center gap-3 mt-4 md:mt-0">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
               <select
-                className="select select-bordered"
+                className="select select-bordered w-full sm:w-auto"
                 value={selectedSampleIndex}
                 onChange={(e) => setSelectedSampleIndex(Number(e.target.value))}
               >
@@ -180,7 +180,7 @@ const CreateProblemForm = () => {
               </select>
               <button
                 type="button"
-                className="btn btn-secondary gap-2"
+                className="btn btn-secondary w-full sm:w-auto gap-2"
                 onClick={loadSampleData}
               >
                 <Download className="w-4 h-4" />
@@ -261,14 +261,14 @@ const CreateProblemForm = () => {
             <div className="space-y-6">
               {/* Tags */}
               <div className="card bg-base-200 p-4 md:p-6 shadow-md">
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                   <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                    <BookOpen className="w-5 h-5" />
+                    <BookOpen className="w-5 h-5 shrink-0" />
                     Tags
                   </h3>
                   <button
                     type="button"
-                    className="btn btn-primary btn-sm"
+                    className="btn btn-primary btn-sm md:btn-md"
                     onClick={() => appendTag("")}
                   >
                     <Plus className="w-4 h-4 mr-1" /> Add Tag
@@ -285,11 +285,11 @@ const CreateProblemForm = () => {
                       />
                       <button
                         type="button"
-                        className="btn btn-ghost btn-square btn-sm"
+                        className="btn btn-ghost text-error btn-square btn-sm sm:btn-md"
                         onClick={() => removeTag(index)}
                         disabled={tagFields.length === 1}
                       >
-                        <Trash2 className="w-4 h-4 text-error" />
+                        <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
                     </div>
                   ))}
@@ -303,14 +303,14 @@ const CreateProblemForm = () => {
 
               {/* Hints */}
               <div className="card bg-base-200 p-4 md:p-6 shadow-md">
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                   <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                    <Lightbulb className="w-5 h-5 text-warning" />
+                    <Lightbulb className="w-5 h-5 text-warning shrink-0" />
                     Hints
                   </h3>
                   <button
                     type="button"
-                    className="btn btn-primary btn-sm"
+                    className="btn btn-primary btn-sm md:btn-md"
                     onClick={() => appendHint("")}
                   >
                     <Plus className="w-4 h-4 mr-1" /> Add Hint
@@ -326,11 +326,11 @@ const CreateProblemForm = () => {
                       />
                       <button
                         type="button"
-                        className="btn btn-ghost btn-square btn-sm mt-2"
+                        className="btn btn-ghost text-error btn-square btn-sm sm:btn-md mt-2"
                         onClick={() => removeHint(index)}
                         disabled={hintFields.length === 1}
                       >
-                        <Trash2 className="w-4 h-4 text-error" />
+                        <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
                     </div>
                   ))}
@@ -344,14 +344,14 @@ const CreateProblemForm = () => {
 
               {/* Constraints */}
               <div className="card bg-base-200 p-4 md:p-6 shadow-md">
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                   <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-info" />
+                    <FileText className="w-5 h-5 text-info shrink-0" />
                     Constraints
                   </h3>
                   <button
                     type="button"
-                    className="btn btn-primary btn-sm"
+                    className="btn btn-primary btn-sm md:btn-md"
                     onClick={() => appendConstraint("")}
                   >
                     <Plus className="w-4 h-4 mr-1" /> Add Constraint
@@ -368,11 +368,11 @@ const CreateProblemForm = () => {
                       />
                       <button
                         type="button"
-                        className="btn btn-ghost btn-square btn-sm mt-1"
+                        className="btn btn-ghost text-error btn-square btn-sm sm:btn-md mt-1"
                         onClick={() => removeConstraint(index)}
                         disabled={constraintFields.length === 1}
                       >
-                        <Trash2 className="w-4 h-4 text-error" />
+                        <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
                     </div>
                   ))}
@@ -387,14 +387,14 @@ const CreateProblemForm = () => {
 
             {/* Examples */}
             <div className="card bg-base-200 p-4 md:p-6 shadow-md">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                 <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-success" />
+                  <CheckCircle2 className="w-5 h-5 text-success shrink-0" />
                   Examples
                 </h3>
                 <button
                   type="button"
-                  className="btn btn-primary btn-sm"
+                  className="btn btn-primary btn-sm md:btn-md"
                   onClick={() =>
                     appendExample({ input: "", output: "", explanation: "" })
                   }
@@ -412,11 +412,12 @@ const CreateProblemForm = () => {
                         </h4>
                         <button
                           type="button"
-                          className="btn btn-ghost btn-sm text-error"
+                          className="btn btn-ghost text-error btn-sm sm:btn-md"
                           onClick={() => removeExample(index)}
                           disabled={exampleFields.length === 1}
                         >
-                          <Trash2 className="w-4 h-4 mr-1" /> Remove
+                          <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />{" "}
+                          Remove
                         </button>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
@@ -491,14 +492,14 @@ const CreateProblemForm = () => {
 
             {/* Test Cases */}
             <div className="card bg-base-200 p-4 md:p-6 shadow-md">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                 <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5" />
+                  <CheckCircle2 className="w-5 h-5 shrink-0" />
                   Test Cases
                 </h3>
                 <button
                   type="button"
-                  className="btn btn-primary btn-sm"
+                  className="btn btn-primary btn-sm md:btn-md"
                   onClick={() => appendTestCase({ input: "", output: "" })}
                 >
                   <Plus className="w-4 h-4 mr-1" /> Add Test Case
@@ -514,11 +515,12 @@ const CreateProblemForm = () => {
                         </h4>
                         <button
                           type="button"
-                          className="btn btn-ghost btn-sm text-error"
+                          className="btn btn-ghost text-error btn-sm sm:btn-md"
                           onClick={() => removeTestCase(index)}
                           disabled={testCaseFields.length === 1}
                         >
-                          <Trash2 className="w-4 h-4 mr-1" /> Remove
+                          <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />{" "}
+                          Remove
                         </button>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
@@ -684,8 +686,11 @@ const CreateProblemForm = () => {
               </div>
             </div>
 
-            <div className="card-actions justify-end pt-4 border-t">
-              <button type="submit" className="btn btn-primary btn-lg gap-2">
+            <div className="card-actions justify-end pt-4 border-t mt-8">
+              <button
+                type="submit"
+                className="btn btn-primary w-full sm:w-auto btn-lg gap-2"
+              >
                 {isLoading ? (
                   <span className="loading loading-spinner text-white"></span>
                 ) : (

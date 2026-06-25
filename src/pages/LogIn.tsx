@@ -1,12 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Code, Eye, EyeOff, Loader2, Lock, } from "lucide-react";
+import { Code, Eye, EyeOff, Loader2, Lock } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
-import type { LogInForm } from "../types/LogInForm";
-import { LogInSchema } from "../validations/LogInSchema";
 import useAuthStore from "../store/authStore.";
+import type { LogInForm } from "../types/LogInForm";
+import { LogInSchema } from "../validations/logInSchema";
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);

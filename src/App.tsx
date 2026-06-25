@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
-import AddProblem from "./pages/AddProblem";
 import AdminRoutes from "./components/AdminRoutes";
-import HomeLayout from "./Layouts/HomeLayout";
+import HomeLayout from "./layouts/HomeLayout";
+import AddProblem from "./pages/AddProblem";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import NotFound from "./pages/NotFound";

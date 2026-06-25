@@ -53,7 +53,7 @@ const CreateProblemForm = () => {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<CreateProblemFormValues>({
     resolver: zodResolver(createProblemSchema.shape.body),
     defaultValues: defaultFormValues,
@@ -101,12 +101,9 @@ const CreateProblemForm = () => {
     remove: removeExample,
   } = useFieldArray({ control, name: "examples" });
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onSubmit = async (value: CreateProblemFormValues) => {
+  const onSubmit = async (data: CreateProblemFormValues) => {
     try {
-      setIsLoading(true);
-      const res = await axiosInstance.post("/problems/create-problem", value);
+      const res = await axiosInstance.post("/problems/create-problem", data);
       console.log("response data", res.data);
       toast.success(res.data.message || "Problem Created successfully⚡");
       navigation("/");
@@ -115,8 +112,6 @@ const CreateProblemForm = () => {
       toast.error(
         error?.response?.data?.message || "Error while creating problem",
       );
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -706,7 +701,7 @@ const CreateProblemForm = () => {
                 type="button"
                 className="btn btn-outline btn-error w-full sm:w-auto btn-lg gap-2"
                 onClick={() => reset(defaultFormValues)}
-                disabled={isLoading}
+                disabled={isSubmitting}
               >
                 <RotateCcw className="w-5 h-5" />
                 Reset Form
@@ -714,9 +709,9 @@ const CreateProblemForm = () => {
               <button
                 type="submit"
                 className="btn btn-primary w-full sm:w-auto btn-lg gap-2"
-                disabled={isLoading}
+                disabled={isSubmitting}
               >
-                {isLoading ? (
+                {isSubmitting ? (
                   <>
                     <LoaderPinwheel className="h-5 w-5 animate-spin mr-2" />{" "}
                     Creating...

@@ -25,7 +25,6 @@ const useAuthStore = create<AuthState>()((set) => ({
   login: async (data) => {
     try {
       const res = await axiosInstance.post("/auth/login", data);
-
       set({
         authUser: res.data.data.user,
       });
@@ -42,7 +41,6 @@ const useAuthStore = create<AuthState>()((set) => ({
   signup: async (data) => {
     try {
       const res = await axiosInstance.post("/auth/register", data);
-
       set({
         authUser: res.data.data.user,
       });
@@ -59,7 +57,6 @@ const useAuthStore = create<AuthState>()((set) => ({
   logout: async () => {
     try {
       const res = await axiosInstance.post("/auth/logout");
-
       set({
         authUser: null,
       });

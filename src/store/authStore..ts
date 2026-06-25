@@ -4,26 +4,21 @@ import axiosInstance from "../lib/axios";
 import type { AuthState } from "../types/authStore";
 
 const useAuthStore = create<AuthState>()((set) => ({
-  isAuthenticated: false,
   authUser: null,
+  isCheckingAuth: true,
 
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/get-user-profile");
       set({
-        isAuthenticated: true,
         authUser: res.data.data.user,
+        isCheckingAuth: false,
       });
-      toast.success(res.data.message);
     } catch (err: any) {
       set({
-        isAuthenticated: false,
         authUser: null,
+        isCheckingAuth: false,
       });
-      toast.error(
-        err.response?.data?.message || "Failed to check authentication",
-      );
-      throw err;
     }
   },
 
@@ -32,13 +27,11 @@ const useAuthStore = create<AuthState>()((set) => ({
       const res = await axiosInstance.post("/auth/login", data);
 
       set({
-        isAuthenticated: true,
         authUser: res.data.data.user,
       });
       toast.success(res.data.message);
     } catch (err: any) {
       set({
-        isAuthenticated: false,
         authUser: null,
       });
       toast.error(err.response?.data?.message || "Failed to login");
@@ -51,13 +44,11 @@ const useAuthStore = create<AuthState>()((set) => ({
       const res = await axiosInstance.post("/auth/register", data);
 
       set({
-        isAuthenticated: true,
         authUser: res.data.data.user,
       });
       toast.success(res.data.message);
     } catch (err: any) {
       set({
-        isAuthenticated: false,
         authUser: null,
       });
       toast.error(err.response?.data?.message || "Failed to signup");
@@ -70,7 +61,6 @@ const useAuthStore = create<AuthState>()((set) => ({
       const res = await axiosInstance.post("/auth/logout");
 
       set({
-        isAuthenticated: false,
         authUser: null,
       });
       toast.success(res.data.message);

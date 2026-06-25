@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Code, Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
+import { Code, Eye, EyeOff, LoaderPinwheel, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -126,7 +126,7 @@ const SignUp = () => {
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="h-5 w-5 animate-spin mr-2" /> Signing
+                  <LoaderPinwheel className="h-5 w-5 animate-spin mr-2" /> Signing
                   up...
                 </>
               ) : (

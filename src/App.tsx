@@ -1,3 +1,4 @@
+import { LoaderPinwheel } from "lucide-react";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -11,11 +12,19 @@ import SignUp from "./pages/SignUp";
 import useAuthStore from "./store/authStore.";
 
 const App = () => {
-  const { authUser, checkAuth } = useAuthStore();
+  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  if (isCheckingAuth && !authUser) {
+    return (
+     <div className="flex items-center justify-center h-screen">
+        <LoaderPinwheel className="size-10 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <>

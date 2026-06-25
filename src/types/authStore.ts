@@ -3,7 +3,7 @@ import type { SignUpForm } from "./signUpForm";
 
 export interface AuthState {
   authUser: any | null;
-  isAuthenticated: boolean;
+  isCheckingAuth: boolean;
   checkAuth: () => Promise<void>;
   login: (data: LogInForm) => Promise<void>;
   signup: (data: SignUpForm) => Promise<void>;

@@ -1,13 +1,14 @@
 import { Bookmark, PencilIcon, Plus, SearchX, TrashIcon } from "lucide-react";
 import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 import type { Problem } from "../types/Problem";
 import EmptyState from "./EmptyState";
 
 const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
   const { authUser } = useAuthStore();
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("ALL");
   const [selectedTag, setSelectedTag] = useState("ALL");
@@ -65,7 +66,7 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
+      <div className="flex flex-col md:flex-row md:flex-wrap justify-between items-center mb-6 gap-4">
         <input
           type="text"
           placeholder="Search by title"
@@ -73,35 +74,37 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <select
-          className="select select-bordered bg-base-200"
-          value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
-        >
-          <option value="ALL">All Difficulties</option>
-          {difficulties.map((diff) => (
-            <option key={diff} value={diff}>
-              {diff.charAt(0).toUpperCase() + diff.slice(1).toLowerCase()}
-            </option>
-          ))}
-        </select>
-        <select
-          className="select select-bordered bg-base-200"
-          value={selectedTag}
-          onChange={(e) => setSelectedTag(e.target.value)}
-        >
-          <option value="ALL">All Tags</option>
-          {allTags.map((tag) => (
-            <option key={tag} value={tag}>
-              {tag}
-            </option>
-          ))}
-        </select>
+        <div className="flex w-full md:w-auto gap-3 md:contents">
+          <select
+            className="select select-bordered bg-base-200 flex-1 md:flex-none"
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+          >
+            <option value="ALL">All Difficulties</option>
+            {difficulties.map((diff) => (
+              <option key={diff} value={diff}>
+                {diff.charAt(0).toUpperCase() + diff.slice(1).toLowerCase()}
+              </option>
+            ))}
+          </select>
+          <select
+            className="select select-bordered bg-base-200 flex-1 md:flex-none"
+            value={selectedTag}
+            onChange={(e) => setSelectedTag(e.target.value)}
+          >
+            <option value="ALL">All Tags</option>
+            {allTags.map((tag) => (
+              <option key={tag} value={tag}>
+                {tag}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-xl shadow-md">
-        <table className="table table-zebra table-lg bg-base-200 text-base-content">
+      {/* Desktop Table */}
+      <div className="hidden md:block overflow-x-auto rounded-xl shadow-md mb-4">
+        <table className="table table-zebra table-lg bg-base-200 text-base-content w-full">
           <thead className="bg-base-300">
             <tr>
               <th>Solved</th>
@@ -222,8 +225,120 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
         </table>
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center mt-6 gap-2">
+      {/* Mobile Cards */}
+      <div className="grid grid-cols-1 gap-5 md:hidden mb-4 pb-20 relative">
+        {paginatedProblems.length > 0 ? (
+          paginatedProblems.map((problem) => {
+            const isSolved = problem.solvedProblems.some(
+              (user) => user.userId === authUser?.id,
+            );
+            return (
+              <div
+                key={problem.id}
+                className="card bg-base-100 shadow-lg border border-primary/10 overflow-hidden cursor-pointer hover:border-primary/30 transition-all active:scale-[0.98]"
+                onClick={() => navigate(`/problem/${problem.id}`)}
+              >
+                <div className="card-body p-5">
+                  <div className="flex items-start gap-3 mb-4">
+                    <input
+                      type="checkbox"
+                      checked={isSolved}
+                      readOnly
+                      onClick={(e) => e.stopPropagation()}
+                      className="checkbox checkbox-primary mt-1"
+                    />
+                    <div className="flex flex-col flex-1">
+                      <Link
+                        to={`/problem/${problem.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="font-bold text-lg hover:text-primary transition-colors text-base-content leading-tight mb-1"
+                      >
+                        {problem.title}
+                      </Link>
+                      <p className="text-sm text-base-content/60 line-clamp-2">
+                        {problem.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
+                    <div className="flex flex-wrap gap-1.5">
+                      {(problem.tags || []).map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="badge badge-outline badge-primary badge-sm font-semibold"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <span
+                      className={`badge font-bold text-xs text-white whitespace-nowrap ${
+                        problem.difficulty === "EASY"
+                          ? "badge-success"
+                          : problem.difficulty === "MEDIUM"
+                            ? "badge-warning"
+                            : "badge-error"
+                      }`}
+                    >
+                      {problem.difficulty}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 justify-end mt-4 pt-4 border-t border-base-300/50">
+                    {authUser?.role === "ADMIN" && (
+                      <>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toast.success(
+                              "Delete functionality not implemented yet",
+                            );
+                          }}
+                          className="btn btn-sm btn-error flex-1 text-white gap-2"
+                        >
+                          <TrashIcon className="w-4 h-4" /> Delete
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toast.success(
+                              "Edit functionality not implemented yet",
+                            );
+                          }}
+                          className="btn btn-sm btn-primary flex-1 text-white gap-2"
+                        >
+                          <PencilIcon className="w-4 h-4" /> Edit
+                        </button>
+                      </>
+                    )}
+                    <button
+                      className="btn btn-sm btn-outline flex-1 gap-2 items-center"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toast.success(
+                          "Save to Playlist functionality not implemented yet",
+                        );
+                      }}
+                    >
+                      <Bookmark className="w-4 h-4" /> Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <EmptyState
+            icon={<SearchX className="w-10 h-10 text-base-content/40" />}
+            title="No problems found"
+            description="We couldn't find any problems matching your current filters."
+          />
+        )}
+      </div>
+
+      {/* Desktop Pagination */}
+      <div className="hidden md:flex justify-center mt-6 gap-2">
         <button
           className="btn btn-sm"
           disabled={currentPage === 1}
@@ -236,6 +351,27 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
         </span>
         <button
           className="btn btn-sm"
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+        >
+          Next
+        </button>
+      </div>
+
+      {/* Mobile Pagination */}
+      <div className="md:hidden sticky bottom-0 bg-base-100/95 backdrop-blur-md p-4 border-t border-base-300 shadow-[0_-4px_10px_-2px_rgba(0,0,0,0.1)] rounded-b-xl flex justify-center mt-6 gap-4 z-20">
+        <button
+          className="btn btn-sm btn-outline w-24"
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+        >
+          Previous
+        </button>
+        <div className="flex items-center justify-center font-semibold text-base-content/80 min-w-16">
+          {currentPage} / {totalPages}
+        </div>
+        <button
+          className="btn btn-sm btn-outline w-24"
           disabled={currentPage === totalPages}
           onClick={() => setCurrentPage((prev) => prev + 1)}
         >

@@ -60,7 +60,7 @@ const CreateProblemForm = () => {
   });
 
   const {
-    fields: testCaseFields,
+    fields: testcaseFields,
     append: appendTestCase,
     remove: removeTestCase,
   } = useFieldArray({ control, name: "testcases" });
@@ -515,7 +515,7 @@ const CreateProblemForm = () => {
                 </button>
               </div>
               <div className="space-y-6">
-                {testCaseFields.map((field, index) => (
+                {testcaseFields.map((field, index) => (
                   <div key={field.id} className="card bg-base-100 shadow-md">
                     <div className="card-body p-4 md:p-6">
                       <div className="flex justify-between items-center mb-4">
@@ -526,7 +526,7 @@ const CreateProblemForm = () => {
                           type="button"
                           className="btn btn-ghost text-error btn-sm sm:btn-md"
                           onClick={() => removeTestCase(index)}
-                          disabled={testCaseFields.length === 1}
+                          disabled={testcaseFields.length === 1}
                         >
                           <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />{" "}
                           Remove

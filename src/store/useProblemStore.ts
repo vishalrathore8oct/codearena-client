@@ -1,8 +1,21 @@
 import { toast } from "react-hot-toast";
 import { create } from "zustand";
 import axiosInstance from "../lib/axios";
+import type { Problem, SolvedProblem } from "../types/Problem";
 
-export const useProblemStore = create((set) => ({
+interface ProblemStore {
+  problems: Problem[];
+  problem: Problem | null;
+  solvedProblems: SolvedProblem[];
+  isAllProblemsLoading: boolean;
+  isProblemLoading: boolean;
+  isSolvedProblemsLoading: boolean;
+  getAllProblems: () => Promise<void>;
+  getProblemById: (id?: string) => Promise<void>;
+  getAllSolvedProblems: () => Promise<void>;
+}
+
+export const useProblemStore = create<ProblemStore>((set) => ({
   problems: [],
   problem: null,
   solvedProblems: [],
@@ -24,7 +37,7 @@ export const useProblemStore = create((set) => ({
     }
   },
 
-  getProblemById: async (id: string) => {
+  getProblemById: async (id?: string) => {
     set({ isProblemLoading: true });
     try {
       const res = await axiosInstance.get(`/problems/get-problem/${id}`);

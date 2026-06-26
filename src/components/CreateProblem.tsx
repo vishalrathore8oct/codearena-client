@@ -1,12 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Editor from "@monaco-editor/react";
 import {
-  ArrowLeft,
   BookOpen,
   CheckCircle2,
+  ChevronLeft,
   Code2,
   Download,
   FileText,
+  Home,
   Lightbulb,
   LoaderPinwheel,
   Plus,
@@ -160,17 +161,17 @@ const CreateProblemForm = () => {
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body p-4 sm:p-6 md:p-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 pb-4 border-b gap-4">
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-3 sm:gap-4">
               <button
                 type="button"
-                className="btn btn-ghost btn-circle btn-sm md:btn-md"
+                className="flex items-center text-primary hover:text-primary/80 transition-colors bg-primary/10 p-2 rounded-lg"
                 onClick={() => navigation(-1)}
                 aria-label="Go back"
               >
-                <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
+                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+                <Home className="w-5 h-5 md:w-6 md:h-6" />
               </button>
               <h2 className="card-title text-xl sm:text-2xl md:text-3xl flex items-center gap-2 sm:gap-3 m-0">
-                <FileText className="w-6 h-6 md:w-8 md:h-8 text-primary shrink-0" />
                 Create Problem
               </h2>
             </div>

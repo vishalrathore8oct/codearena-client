@@ -5,7 +5,7 @@ import useAuthStore from "../store/useAuthStore";
 import LogoutButton from "./LogoutButton";
 
 interface AuthUser {
-  name: string;
+  fullName: string;
   image?: string;
   role: "ADMIN" | "USER" | string;
 }
@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full py-5">
+    <nav className="w-full py-4 md:py-8 px-2 md:px-10 z-50 relative ">
       <div className="flex w-full justify-between mx-auto max-w-4xl bg-black/15 shadow-lg shadow-neutral-600/5 backdrop-blur-lg border border-gray-200/10 p-4 rounded-2xl">
         {/* Logo Section */}
         <Link to="/" className="flex items-center gap-3 cursor-pointer">
@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
             >
               <li>
                 <p className="text-base font-semibold">
-                  {authUser?.name ?? "Guest"}
+                  {authUser?.fullName ?? "Guest"}
                 </p>
                 <hr className="border-gray-200/10" />
               </li>

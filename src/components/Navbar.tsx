@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="w-full py-4 md:py-8 px-2 md:px-10 z-50 relative ">
+    <nav className="w-full py-4 md:py-4 px-2 md:px-4 z-50 relative ">
       <div className="flex w-full justify-between mx-auto max-w-4xl bg-black/15 shadow-lg shadow-neutral-600/5 backdrop-blur-lg border border-gray-200/10 p-4 rounded-2xl">
         {/* Logo Section */}
         <Link to="/" className="flex items-center gap-3 cursor-pointer">
@@ -30,66 +30,80 @@ const Navbar: React.FC = () => {
           </span>
         </Link>
 
-        {/* User Profile */}
+        {/* User Profile / Auth Actions */}
         <div className="flex items-center gap-8">
-          <div className="dropdown dropdown-end">
-            <label
-              tabIndex={0}
-              className="btn btn-ghost btn-circle avatar flex flex-row"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  src={
-                    authUser?.image ??
-                    "https://avatar.iran.liara.run/public/boy"
-                  }
-                  alt="User Avatar"
-                  className="object-cover"
-                />
-              </div>
-            </label>
+          {authUser ? (
+            <div className="dropdown dropdown-end">
+              <label
+                tabIndex={0}
+                className="btn btn-ghost btn-circle avatar flex flex-row"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    src={
+                      authUser?.image ??
+                      "https://avatar.iran.liara.run/public/boy"
+                    }
+                    alt="User Avatar"
+                    className="object-cover"
+                  />
+                </div>
+              </label>
 
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-1 w-52 space-y-3 rounded-box bg-base-100 p-2 shadow"
-            >
-              <li>
-                <p className="text-base font-semibold">
-                  {authUser?.fullName ?? "Guest"}
-                </p>
-                <hr className="border-gray-200/10" />
-              </li>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-1 w-52 space-y-3 rounded-box bg-base-100 p-2 shadow"
+              >
+                <li>
+                  <p className="text-base font-semibold">
+                    {authUser?.fullName ?? "Guest"}
+                  </p>
+                  <hr className="border-gray-200/10" />
+                </li>
 
-              <li>
-                <Link
-                  to="/profile"
-                  className="text-base font-semibold hover:bg-primary hover:text-white"
-                >
-                  <User className="mr-2 h-4 w-4" />
-                  My Profile
-                </Link>
-              </li>
-
-              {authUser?.role === "ADMIN" && (
                 <li>
                   <Link
-                    to="/add-problem"
+                    to="/profile"
                     className="text-base font-semibold hover:bg-primary hover:text-white"
                   >
-                    <Code className="mr-1 h-4 w-4" />
-                    Add Problem
+                    <User className="mr-2 h-4 w-4" />
+                    My Profile
                   </Link>
                 </li>
-              )}
 
-              <li>
-                <LogoutButton className="hover:bg-primary hover:text-white">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Logout
-                </LogoutButton>
-              </li>
-            </ul>
-          </div>
+                {authUser?.role === "ADMIN" && (
+                  <li>
+                    <Link
+                      to="/add-problem"
+                      className="text-base font-semibold hover:bg-primary hover:text-white"
+                    >
+                      <Code className="mr-1 h-4 w-4" />
+                      Add Problem
+                    </Link>
+                  </li>
+                )}
+
+                <li>
+                  <LogoutButton className="hover:bg-primary hover:text-white">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </LogoutButton>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link
+                to="/login"
+                className="btn btn-outline btn-primary rounded-full px-6"
+              >
+                Log In
+              </Link>
+              <Link to="/signup" className="btn btn-primary rounded-full px-6">
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

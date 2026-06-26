@@ -28,7 +28,7 @@ export const useProblemStore = create<ProblemStore>((set) => ({
     try {
       const res = await axiosInstance.get("/problems/get-all-problems");
       set({ problems: res.data.data.problems });
-      toast.success(res.data.message);
+      // toast.success(res.data.message);
     } catch (err: any) {
       toast.error(err.response?.data?.message || "Failed to fetch problems");
       throw err;
@@ -42,7 +42,7 @@ export const useProblemStore = create<ProblemStore>((set) => ({
     try {
       const res = await axiosInstance.get(`/problems/get-problem/${id}`);
       set({ problem: res.data.data.problem });
-      toast.success(res.data.message);
+      // toast.success(res.data.message);
     } catch (err: any) {
       toast.error(err.response?.data?.message || "Error in getting problem");
       throw err;
@@ -56,7 +56,7 @@ export const useProblemStore = create<ProblemStore>((set) => ({
     try {
       const res = await axiosInstance.get("/problems/get-all-solved-problems");
       set({ solvedProblems: res.data.data.solvedProblems });
-      toast.success(res.data.message);
+      // toast.success(res.data.message);
     } catch (err: any) {
       toast.error(
         err.response?.data?.message || "Error getting solved problems",

@@ -6,6 +6,7 @@ import LoadingState from "./components/LoadingState";
 import HomeLayout from "./layouts/HomeLayout";
 import AddProblem from "./pages/AddProblem";
 import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
 import LogIn from "./pages/LogIn";
 import NotFound from "./pages/NotFound";
 import ProblemPage from "./pages/ProblemPage";
@@ -34,10 +35,7 @@ const App = () => {
       <GlobalToaster />
       <Routes>
         <Route path="/" element={<HomeLayout />}>
-          <Route
-            index
-            element={authUser ? <HomePage /> : <Navigate to={"/login"} />}
-          />
+          <Route index element={authUser ? <HomePage /> : <LandingPage />} />
         </Route>
 
         <Route

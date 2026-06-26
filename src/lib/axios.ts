@@ -59,7 +59,8 @@ axiosInstance.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError, null);
         // If refresh fails, it means the refresh token is expired or invalid
-        if (window.location.pathname !== "/login") {
+        const publicRoutes = ["/", "/login", "/signup"];
+        if (!publicRoutes.includes(window.location.pathname)) {
           window.location.href = "/login";
         }
         return Promise.reject(refreshError);
@@ -69,7 +70,7 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;

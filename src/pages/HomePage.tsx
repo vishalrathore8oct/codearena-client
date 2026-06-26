@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
-import { FolderSearch, LoaderPinwheel } from "lucide-react";
+import { FolderSearch } from "lucide-react";
+import EmptyState from "../components/EmptyState";
+import LoadingState from "../components/LoadingState";
 import ProblemTable from "../components/ProblemTable";
 import { useProblemStore } from "../store/useProblemStore";
 
@@ -13,9 +15,11 @@ const HomePage = () => {
 
   if (isAllProblemsLoading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <LoaderPinwheel className="size-10 animate-spin" />
-      </div>
+      <LoadingState
+        title="Loading Problems"
+        description="Please wait while we fetch the details..."
+        className="h-screen"
+      />
     );
   }
 
@@ -34,19 +38,12 @@ const HomePage = () => {
       {problems.length > 0 ? (
         <ProblemTable problems={problems} />
       ) : (
-        <div className="mt-16 flex flex-col items-center justify-center p-10 bg-base-200/50 backdrop-blur-md border border-primary/30 border-dashed rounded-3xl shadow-2xl w-full max-w-lg z-10 transition-all duration-300 hover:border-primary/50 hover:shadow-primary/5">
-          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 shadow-inner animate-pulse">
-            <FolderSearch className="w-10 h-10 text-primary opacity-90" />
-          </div>
-          <h3 className="text-2xl font-bold text-base-content mb-3">
-            No Problems Found
-          </h3>
-          <p className="text-center text-base-content/70">
-            We couldn't find any coding problems right now.
-            <br />
-            Please check back later or try adjusting your filters!
-          </p>
-        </div>
+        <EmptyState
+          icon={<FolderSearch className="w-10 h-10 text-primary opacity-90" />}
+          title="No Problems Found"
+          description="We couldn't find any coding problems right now. Please check back later or try adjusting your filters!"
+          className="mt-16"
+        />
       )}
     </div>
   );

@@ -1,6 +1,8 @@
-import { ChevronLeft, Home, LoaderPinwheel } from "lucide-react";
+import { ChevronLeft, Home, SearchX } from "lucide-react";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import EmptyState from "../components/EmptyState";
+import LoadingState from "../components/LoadingState";
 import { useProblemStore } from "../store/useProblemStore";
 
 const ProblemPage = () => {
@@ -12,20 +14,29 @@ const ProblemPage = () => {
     getProblemById(id);
   }, [id, getProblemById]);
 
-  if (isProblemLoading || !problem) {
+  if (isProblemLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-base-200">
-        <div className="flex flex-col items-center justify-center bg-base-100 p-10 rounded-3xl shadow-2xl border border-primary/20 backdrop-blur-md">
-          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 shadow-inner animate-pulse">
-            <LoaderPinwheel className="w-10 h-10 text-primary animate-spin" />
-          </div>
-          <h2 className="text-2xl font-bold text-base-content mb-2">
-            Loading Problem
-          </h2>
-          <p className="text-base-content/60 text-center">
-            Please wait while we fetch the details...
-          </p>
-        </div>
+      <LoadingState
+        title="Loading Problem"
+        description="Please wait while we fetch the details..."
+        className="bg-base-200"
+      />
+    );
+  }
+
+  if (!problem) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-base-200 p-4">
+        <EmptyState
+          icon={<SearchX className="w-10 h-10 text-primary opacity-90" />}
+          title="Problem Not Found"
+          description="The problem you are looking for does not exist or has been removed. Please check the URL or return home."
+        >
+          <Link to="/" className="btn btn-primary mt-4">
+            <Home className="w-4 h-4 mr-2" />
+            Return to Home
+          </Link>
+        </EmptyState>
       </div>
     );
   }

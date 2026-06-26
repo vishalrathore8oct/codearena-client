@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 import type { Problem } from "../types/Problem";
+import EmptyState from "./EmptyState";
 
 const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
   const { authUser } = useAuthStore();
@@ -205,19 +206,15 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
               })
             ) : (
               <tr>
-                <td colSpan={5} className="py-16">
-                  <div className="flex flex-col items-center justify-center text-center w-full">
-                    <div className="w-20 h-20 bg-base-300 rounded-full flex items-center justify-center mb-5 shadow-inner">
+                <td colSpan={5} className="py-8">
+                  <EmptyState
+                    icon={
                       <SearchX className="w-10 h-10 text-base-content/40" />
-                    </div>
-                    <h3 className="text-xl font-bold text-base-content mb-2">
-                      No problems found
-                    </h3>
-                    <p className="text-base text-base-content/60 max-w-sm">
-                      We couldn't find any problems matching your current
-                      filters. Try adjusting your search query or criteria.
-                    </p>
-                  </div>
+                    }
+                    title="No problems found"
+                    description="We couldn't find any problems matching your current filters. Try adjusting your search query or criteria."
+                    className="border-none shadow-none bg-transparent"
+                  />
                 </td>
               </tr>
             )}

@@ -180,7 +180,7 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
                                   "Edit functionality not implemented yet",
                                 )
                               }
-                              className="btn btn-sm btn-warning"
+                              className="btn btn-sm btn-primary"
                             >
                               <PencilIcon className="w-4 h-4 text-white" />
                             </button>

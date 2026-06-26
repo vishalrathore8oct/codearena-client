@@ -8,6 +8,7 @@ import AddProblem from "./pages/AddProblem";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import NotFound from "./pages/NotFound";
+import ProblemPage from "./pages/ProblemPage";
 import SignUp from "./pages/SignUp";
 import useAuthStore from "./store/useAuthStore";
 
@@ -44,6 +45,10 @@ const App = () => {
         <Route
           path="/login"
           element={!authUser ? <LogIn /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/problem/:id"
+          element={authUser ? <ProblemPage /> : <Navigate to={"/login"} />}
         />
         <Route element={<AdminRoutes />}>
           <Route

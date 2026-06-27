@@ -5,12 +5,16 @@ import GlobalToaster from "./components/GlobalToaster";
 import LoadingState from "./components/LoadingState";
 import HomeLayout from "./layouts/HomeLayout";
 import AddProblem from "./pages/AddProblem";
+import ForgotPassword from "./pages/ForgotPassword";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import LogIn from "./pages/LogIn";
 import NotFound from "./pages/NotFound";
 import ProblemPage from "./pages/ProblemPage";
+import ResendVerificationEmail from "./pages/ResendVerificationEmail";
+import ResetPassword from "./pages/ResetPassword";
 import SignUp from "./pages/SignUp";
+import VerifyEmail from "./pages/VerifyEmail";
 import useAuthStore from "./store/useAuthStore";
 
 const App = () => {
@@ -45,6 +49,24 @@ const App = () => {
         <Route
           path="/login"
           element={!authUser ? <LogIn /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/verify-email/:token"
+          element={!authUser ? <VerifyEmail /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/forgot-password"
+          element={!authUser ? <ForgotPassword /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/reset-password/:token"
+          element={!authUser ? <ResetPassword /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/resend-verification"
+          element={
+            !authUser ? <ResendVerificationEmail /> : <Navigate to={"/"} />
+          }
         />
         <Route
           path="/problem/:id"

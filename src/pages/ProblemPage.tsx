@@ -9,6 +9,7 @@ const ProblemPage = () => {
   const { id } = useParams();
   const { getProblemById, problem, isProblemLoading } = useProblemStore();
   const navigation = useNavigate();
+  console.log("problem", problem);
 
   useEffect(() => {
     getProblemById(id);

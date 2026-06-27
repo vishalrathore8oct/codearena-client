@@ -113,10 +113,28 @@ const LogIn = () => {
             </button>
           </form>
 
-          <div className="text-center">
+          <div className="text-center space-y-2">
+            <p className="text-base-content/60 text-sm">
+              <Link
+                to="/forgot-password"
+                className="link link-primary hover:opacity-80"
+              >
+                Forgot your password?
+              </Link>
+            </p>
+            <p className="text-base-content/60 text-sm">
+              Didn't receive verification email?{" "}
+              <Link
+                to="/resend-verification"
+                className="link link-primary hover:opacity-80"
+              >
+                Resend it
+              </Link>
+            </p>
+            <div className="divider my-4">OR</div>
             <p className="text-base-content/60">
-              Already have an account?{" "}
-              <Link to="/signup" className="link link-primary">
+              Don't have an account?{" "}
+              <Link to="/signup" className="link link-primary hover:opacity-80">
                 Sign up
               </Link>
             </p>

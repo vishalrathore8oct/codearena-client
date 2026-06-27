@@ -35,7 +35,9 @@ axiosInstance.interceptors.response.use(
       error.response?.status === 401 &&
       originalRequest &&
       !originalRequest._retry &&
-      !originalRequest.url?.includes("refresh-token")
+      !originalRequest.url?.includes("refresh-token") &&
+      !originalRequest.url?.includes("login") &&
+      !originalRequest.url?.includes("register")
     ) {
       if (isRefreshing) {
         return new Promise(function (resolve, reject) {
@@ -59,8 +61,20 @@ axiosInstance.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError, null);
         // If refresh fails, it means the refresh token is expired or invalid
-        const publicRoutes = ["/", "/login", "/signup"];
-        if (!publicRoutes.includes(window.location.pathname)) {
+        const publicRoutes = [
+          "/",
+          "/login",
+          "/signup",
+          "/forgot-password",
+          "/resend-verification",
+        ];
+        const path = window.location.pathname;
+        const isPublicRoute =
+          publicRoutes.includes(path) ||
+          path.startsWith("/verify-email/") ||
+          path.startsWith("/reset-password/");
+
+        if (!isPublicRoute) {
           window.location.href = "/login";
         }
         return Promise.reject(refreshError);

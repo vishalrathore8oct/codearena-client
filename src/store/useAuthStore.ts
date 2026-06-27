@@ -41,9 +41,6 @@ const useAuthStore = create<AuthState>()((set) => ({
   signup: async (data) => {
     try {
       const res = await axiosInstance.post("/auth/register", data);
-      set({
-        authUser: res.data.data.user,
-      });
       toast.success(res.data.message);
     } catch (err: any) {
       set({
@@ -63,6 +60,50 @@ const useAuthStore = create<AuthState>()((set) => ({
       toast.success(res.data.message);
     } catch (err: any) {
       toast.error(err.response?.data?.message || "Failed to logout");
+      throw err;
+    }
+  },
+
+  verifyEmail: async (token) => {
+    try {
+      const res = await axiosInstance.get(`/auth/verify-email/${token}`);
+      toast.success(res.data.message);
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Failed to verify email");
+      throw err;
+    }
+  },
+
+  resendVerificationEmail: async (email) => {
+    try {
+      const res = await axiosInstance.post("/auth/resend-verification-email", {
+        email,
+      });
+      toast.success(res.data.message);
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Failed to resend email");
+      throw err;
+    }
+  },
+
+  forgotPassword: async (email) => {
+    try {
+      const res = await axiosInstance.post("/auth/forgot-password", { email });
+      toast.success(res.data.message);
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Failed to send reset link");
+      throw err;
+    }
+  },
+
+  resetPassword: async (token, password) => {
+    try {
+      const res = await axiosInstance.post(`/auth/reset-password/${token}`, {
+        password,
+      });
+      toast.success(res.data.message);
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Failed to reset password");
       throw err;
     }
   },

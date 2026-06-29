@@ -94,7 +94,7 @@ Ensure you have the following installed on your local machine:
 3. **Configure Environment Variables:**
 
    ```bash
-   cp .env.sample .env
+   cp env.sample .env
    ```
 
    _Edit `.env` and fill in your API base URL pointing to your running CodeArena backend._

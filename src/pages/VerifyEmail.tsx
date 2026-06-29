@@ -1,4 +1,4 @@
-import { CheckCircle2, Loader2, XCircle } from "lucide-react";
+import { CheckCircle2, LoaderPinwheel, XCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
@@ -37,7 +37,7 @@ const VerifyEmail = () => {
       <div className="max-w-md w-full bg-base-100 shadow-xl rounded-2xl p-8 text-center space-y-6">
         {status === "loading" && (
           <>
-            <Loader2 className="w-16 h-16 animate-spin text-primary mx-auto" />
+            <LoaderPinwheel className="w-16 h-16 animate-spin text-primary mx-auto" />
             <h2 className="text-2xl font-bold">Verifying your email...</h2>
             <p className="text-base-content/60">
               Please wait a moment while we verify your account.

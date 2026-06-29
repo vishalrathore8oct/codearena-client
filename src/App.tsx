@@ -8,12 +8,12 @@ import AddProblem from "./pages/AddProblem";
 import ForgotPassword from "./pages/ForgotPassword";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
-import LogIn from "./pages/LogIn";
+import LogIn from "./pages/LogInPage";
 import NotFound from "./pages/NotFound";
 import ProblemPage from "./pages/ProblemPage";
 import ResendVerificationEmail from "./pages/ResendVerificationEmail";
 import ResetPassword from "./pages/ResetPassword";
-import SignUp from "./pages/SignUp";
+import SignUp from "./pages/SignUpPage";
 import VerifyEmail from "./pages/VerifyEmail";
 import useAuthStore from "./store/useAuthStore";
 

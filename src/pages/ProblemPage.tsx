@@ -7,7 +7,6 @@ import {
   FileText,
   Home,
   Lightbulb,
-  MessageSquare,
   Play,
   SearchX,
   Terminal,
@@ -186,12 +185,6 @@ const ProblemPage = () => {
             development)
           </div>
         );
-      case "discussion":
-        return (
-          <div className="p-4 text-center text-base-content/70">
-            discussion will be shown here. (This feature is under development)
-          </div>
-        );
       case "hints":
         return (
           <div className="p-2 sm:p-4">
@@ -309,15 +302,6 @@ const ProblemPage = () => {
                 >
                   <Code2 className="w-4 h-4" />
                   Submissions
-                </button>
-                <button
-                  className={`tab gap-2 pb-2 whitespace-nowrap ${
-                    activeTab === "discussion" ? "tab-active" : ""
-                  }`}
-                  onClick={() => setActiveTab("discussion")}
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  Discussion
                 </button>
                 <button
                   className={`tab gap-2 pb-2 whitespace-nowrap ${

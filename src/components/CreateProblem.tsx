@@ -7,7 +7,6 @@ import {
   Code2,
   Download,
   FileText,
-  Home,
   Lightbulb,
   LoaderPinwheel,
   Plus,
@@ -47,7 +46,7 @@ const defaultFormValues: CreateProblemFormValues = {
 
 const CreateProblemForm = () => {
   const [selectedSampleIndex, setSelectedSampleIndex] = useState(0);
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -106,7 +105,7 @@ const CreateProblemForm = () => {
     try {
       const res = await axiosInstance.post("/problems/create-problem", data);
       toast.success(res.data.message || "Problem Created successfully⚡");
-      navigation("/");
+      navigate("/");
     } catch (error: any) {
       console.error(error);
       toast.error(
@@ -164,12 +163,11 @@ const CreateProblemForm = () => {
             <div className="flex items-center gap-3 sm:gap-4">
               <button
                 type="button"
-                className="flex items-center text-primary hover:text-primary/80 transition-colors bg-primary/10 p-2 rounded-lg"
-                onClick={() => navigation(-1)}
+                className="flex items-center text-primary hover:text-primary/80 transition-colors bg-primary/10 p-2 rounded-lg mr-1 sm:mr-2 shrink-0"
+                onClick={() => navigate(-1)}
                 aria-label="Go back"
               >
-                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-                <Home className="w-5 h-5 md:w-6 md:h-6" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <h2 className="card-title text-xl sm:text-2xl md:text-3xl flex items-center gap-2 sm:gap-3 m-0">
                 Create Problem

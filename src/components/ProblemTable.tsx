@@ -6,6 +6,19 @@ import useAuthStore from "../store/useAuthStore";
 import type { Problem } from "../types/Problem";
 import EmptyState from "./EmptyState";
 
+const getDifficultyColor = (difficulty: string) => {
+  switch (difficulty) {
+    case "EASY":
+      return "bg-success/15 text-success border border-success/30 font-bold shadow-sm shadow-success/10";
+    case "MEDIUM":
+      return "bg-warning/15 text-warning border border-warning/30 font-bold shadow-sm shadow-warning/10";
+    case "HARD":
+      return "bg-error/15 text-error border border-error/30 font-bold shadow-sm shadow-error/10";
+    default:
+      return "bg-base-200 text-base-content border border-base-300 font-bold";
+  }
+};
+
 const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
   const { authUser } = useAuthStore();
   const navigate = useNavigate();
@@ -152,13 +165,9 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
                     </td>
                     <td>
                       <span
-                        className={`badge font-semibold text-xs text-white ${
-                          problem.difficulty === "EASY"
-                            ? "badge-success"
-                            : problem.difficulty === "MEDIUM"
-                              ? "badge-warning"
-                              : "badge-error"
-                        }`}
+                        className={`badge text-[11px] tracking-wider px-3 py-3 uppercase ${getDifficultyColor(
+                          problem.difficulty,
+                        )}`}
                       >
                         {problem.difficulty}
                       </span>
@@ -273,13 +282,9 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
                       ))}
                     </div>
                     <span
-                      className={`badge font-bold text-xs text-white whitespace-nowrap ${
-                        problem.difficulty === "EASY"
-                          ? "badge-success"
-                          : problem.difficulty === "MEDIUM"
-                            ? "badge-warning"
-                            : "badge-error"
-                      }`}
+                      className={`badge text-[11px] tracking-wider whitespace-nowrap px-3 py-3 uppercase ${getDifficultyColor(
+                        problem.difficulty,
+                      )}`}
                     >
                       {problem.difficulty}
                     </span>

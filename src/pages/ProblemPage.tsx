@@ -18,9 +18,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import EmptyState from "../components/EmptyState";
 import LoadingState from "../components/LoadingState";
 import Submission from "../components/Submission";
+import SubmissionsList from "../components/SubmissionList";
 import { getJudge0LanguageId } from "../lib/language";
 import { useExecutionStore } from "../store/useExecutionStore";
 import { useProblemStore } from "../store/useProblemStore";
+import { useSubmissionStore } from "../store/useSubmissionStore";
 
 const ProblemPage = () => {
   const { id } = useParams();
@@ -34,13 +36,26 @@ const ProblemPage = () => {
     { input: string; output: string }[]
   >([]);
   const { executeCode, submission, isExecuting } = useExecutionStore();
-  const submissionCount = 123; // Placeholder for submission count, replace with actual data when available
+  const {
+    submissions,
+    isSubmissionsLoading,
+    getSubmissionForProblem,
+    getSubmissionCountForProblem,
+    submissionCount,
+  } = useSubmissionStore();
 
   useEffect(() => {
     if (id) {
       getProblemById(id);
+      getSubmissionCountForProblem(id);
     }
-  }, [id, getProblemById]);
+  }, [id, getProblemById, getSubmissionCountForProblem]);
+
+  useEffect(() => {
+    if (activeTab === "submissions" && id) {
+      getSubmissionForProblem(id);
+    }
+  }, [activeTab, id, getSubmissionForProblem]);
 
   useEffect(() => {
     if (problem) {
@@ -180,9 +195,11 @@ const ProblemPage = () => {
         );
       case "submissions":
         return (
-          <div className="p-4 text-center text-base-content/70">
-            submissions list will be shown here. (This feature is under
-            development)
+          <div className="p-4 sm:p-0">
+            <SubmissionsList
+              submissions={submissions}
+              isSubmissionsLoading={isSubmissionsLoading}
+            />
           </div>
         );
       case "hints":
@@ -253,7 +270,9 @@ const ProblemPage = () => {
               </span>
               <span className="text-base-content/30 shrink-0">•</span>
               <Users className="w-3 h-3 sm:w-4 sm:h-4 shrink-0" />
-              <span className="truncate">{submissionCount} Submissions</span>
+              <span className="truncate">
+                {submissionCount ?? 0} Submissions
+              </span>
             </div>
           </div>
         </div>

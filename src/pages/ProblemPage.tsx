@@ -7,6 +7,7 @@ import {
   FileText,
   Home,
   Lightbulb,
+  LoaderPinwheel,
   Play,
   SearchX,
   Terminal,
@@ -108,7 +109,7 @@ const ProblemPage = () => {
       <LoadingState
         title="Loading Problem"
         description="Please wait while we fetch the details..."
-        className="bg-base-200"
+        className="h-screen bg-base-200"
       />
     );
   }
@@ -376,7 +377,11 @@ const ProblemPage = () => {
                     onClick={handleRunCode}
                     disabled={isExecuting}
                   >
-                    {!isExecuting && <Play className="w-4 h-4 shrink-0" />}
+                    {isExecuting ? (
+                      <LoaderPinwheel className="w-4 h-4 animate-spin shrink-0" />
+                    ) : (
+                      <Play className="w-4 h-4 shrink-0" />
+                    )}
                     {isExecuting ? (
                       "Running..."
                     ) : (

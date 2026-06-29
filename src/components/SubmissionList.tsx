@@ -6,6 +6,7 @@ import {
   XCircle,
 } from "lucide-react";
 import type { SubmissionData } from "../types/Submission";
+import LoadingState from "./LoadingState";
 
 interface SubmissionsListProps {
   submissions: SubmissionData[];
@@ -54,9 +55,10 @@ const SubmissionsList = ({
   // Loading state
   if (isSubmissionsLoading) {
     return (
-      <div className="flex justify-center items-center p-8">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
+      <LoadingState
+        title="Loading Submissions"
+        description="Please wait while we fetch the details..."
+      />
     );
   }
 

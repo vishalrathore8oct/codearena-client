@@ -18,7 +18,6 @@ const HomePage = () => {
       <LoadingState
         title="Loading Problems"
         description="Please wait while we fetch the details..."
-        className="h-screen"
       />
     );
   }

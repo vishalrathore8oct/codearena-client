@@ -165,7 +165,7 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
                     </td>
                     <td>
                       <span
-                        className={`badge text-[11px] tracking-wider px-3 py-3 uppercase ${getDifficultyColor(
+                        className={`badge text-[11px] tracking-wider px-3 py-3 uppercase flex items-center justify-center ${getDifficultyColor(
                           problem.difficulty,
                         )}`}
                       >
@@ -282,7 +282,7 @@ const ProblemsTable = ({ problems }: { problems: Problem[] }) => {
                       ))}
                     </div>
                     <span
-                      className={`badge text-[11px] tracking-wider whitespace-nowrap px-3 py-3 uppercase ${getDifficultyColor(
+                      className={`badge text-[11px] tracking-wider whitespace-nowrap px-3 py-3 flex items-center justify-center uppercase ${getDifficultyColor(
                         problem.difficulty,
                       )}`}
                     >

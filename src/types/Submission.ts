@@ -24,6 +24,7 @@ export interface SubmissionData {
   memory: string | null;
   time: string | null;
   testcaseResults?: TestCaseResult[];
+  createdAt?: string;
 }
 
 export interface SubmissionProps {
